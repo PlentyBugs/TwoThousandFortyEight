@@ -11,9 +11,9 @@ public class Cell extends JButton {
         setEnabled(false);
         if(number != 0){
             setText(Integer.toString(number));
-            setBackground(new Color(255, 237,0));
+            setBackground(new Color(255, Math.min(255, 100 + (int)(Math.log(number)*20)),0));
         }
-        cellSize(50, 50);
+        cellSize(100, 100);
     }
 
     public int getNumber() {
@@ -36,6 +36,8 @@ public class Cell extends JButton {
 
     public void upNumber(){
         number *= 2;
+        Game.addScore(number);
         setText(Integer.toString(number));
+        setBackground(new Color(255, Math.min(255, 100 + (int)(Math.log(number)*20)),0));
     }
 }

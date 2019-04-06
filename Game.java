@@ -62,6 +62,10 @@ public class Game {
     }
 
     private static void lose(){
-        System.out.println("You lose!");
+        new LoseWindow();
+    }
+
+    static void addScore(int scoreAdd){
+        score += scoreAdd;
     }
 }

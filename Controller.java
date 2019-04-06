@@ -39,15 +39,17 @@ public class Controller implements KeyListener {
 
     private void moveToLeft(){
         for(int i = 0; i < Game.getSize(); i++) {
-            for (int j = 1; j < Game.getSize(); j++) {
-                if(Game.getCells()[i][j].getNumber() == 0)
-                    continue;
-                if(Game.getCells()[i][j].connect(Game.getCells()[i][j-1]) == 0){
-                    Game.getCells()[i][j-1] = new Cell(Game.getCells()[i][j].getNumber());
-                    Game.getCells()[i][j] = new Cell(0);
-                } else if(Game.getCells()[i][j].connect(Game.getCells()[i][j-1]) == 1){
-                    Game.getCells()[i][j-1].upNumber();
-                    Game.getCells()[i][j] = new Cell(0);
+            for (int k = 1; k < Game.getSize(); k++) {
+                for (int j = 1; j < Game.getSize(); j++) {
+                    if (Game.getCells()[i][j].getNumber() == 0)
+                        continue;
+                    if (Game.getCells()[i][j].connect(Game.getCells()[i][j - 1]) == 0) {
+                        Game.getCells()[i][j - 1] = new Cell(Game.getCells()[i][j].getNumber());
+                        Game.getCells()[i][j] = new Cell(0);
+                    } else if (Game.getCells()[i][j].connect(Game.getCells()[i][j - 1]) == 1) {
+                        Game.getCells()[i][j - 1].upNumber();
+                        Game.getCells()[i][j] = new Cell(0);
+                    }
                 }
             }
         }
@@ -55,28 +57,54 @@ public class Controller implements KeyListener {
 
     private void moveToRight(){
         for(int i = 0; i < Game.getSize(); i++) {
-            for (int j = 0; j < Game.getSize()-1; j++) {
-                if(Game.getCells()[i][j].getNumber() == 0)
-                    continue;
-                Game.getCells()[i][j].connect(Game.getCells()[i][j-1]);
+            for (int k = 1; k < Game.getSize(); k++) {
+                for (int j = 0; j < Game.getSize()-1; j++) {
+                    if (Game.getCells()[i][j].getNumber() == 0)
+                        continue;
+                    if (Game.getCells()[i][j].connect(Game.getCells()[i][j + 1]) == 0) {
+                        Game.getCells()[i][j + 1] = new Cell(Game.getCells()[i][j].getNumber());
+                        Game.getCells()[i][j] = new Cell(0);
+                    } else if (Game.getCells()[i][j].connect(Game.getCells()[i][j + 1]) == 1) {
+                        Game.getCells()[i][j + 1].upNumber();
+                        Game.getCells()[i][j] = new Cell(0);
+                    }
+                }
             }
         }
     }
 
     private void moveToTop(){
-        for(int j = 0; j < Game.getSize(); j++) {
-            for (int i = 0; i < Game.getSize(); i++) {
-                if(Game.getCells()[i][j].getNumber() == 0)
-                    continue;
+        for (int j = 0; j < Game.getSize(); j++) {
+            for (int k = 1; k < Game.getSize(); k++) {
+                for(int i = 1; i < Game.getSize(); i++) {
+                    if (Game.getCells()[i][j].getNumber() == 0)
+                        continue;
+                    if (Game.getCells()[i][j].connect(Game.getCells()[i - 1][j]) == 0) {
+                        Game.getCells()[i - 1][j] = new Cell(Game.getCells()[i][j].getNumber());
+                        Game.getCells()[i][j] = new Cell(0);
+                    } else if (Game.getCells()[i][j].connect(Game.getCells()[i - 1][j]) == 1) {
+                        Game.getCells()[i - 1][j].upNumber();
+                        Game.getCells()[i][j] = new Cell(0);
+                    }
+                }
             }
         }
     }
 
     private void moveToBot(){
         for(int j = 0; j < Game.getSize(); j++) {
-            for (int i = 0; i < Game.getSize(); i++) {
-                if(Game.getCells()[i][j].getNumber() == 0)
-                    continue;
+            for (int k = 1; k < Game.getSize(); k++) {
+                for (int i = 0; i < Game.getSize()-1; i++) {
+                    if (Game.getCells()[i][j].getNumber() == 0)
+                        continue;
+                    if (Game.getCells()[i][j].connect(Game.getCells()[i + 1][j]) == 0) {
+                        Game.getCells()[i + 1][j] = new Cell(Game.getCells()[i][j].getNumber());
+                        Game.getCells()[i][j] = new Cell(0);
+                    } else if (Game.getCells()[i][j].connect(Game.getCells()[i + 1][j]) == 1) {
+                        Game.getCells()[i + 1][j].upNumber();
+                        Game.getCells()[i][j] = new Cell(0);
+                    }
+                }
             }
         }
     }
